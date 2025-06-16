@@ -5,6 +5,8 @@ google-cloud-aiplatform==1.62.0
 google-cloud-documentai==2.31.0
 python-dotenv==1.0.1
 scikit-learn==1.5.1
-pandas==2.2.2
+pandas==2.2.2; platform_system != "Linux" or platform_machine != "x86_64"
+pandas==2.2.2; platform_system == "Linux" and platform_machine == "x86_64" --only-binary pandas
 PyPDF2==3.0.1
 gunicorn==22.0.0
+cython==3.0.10
