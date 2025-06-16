@@ -14,13 +14,13 @@ from chatbot import generate_answer
 
 load_dotenv()
 app = Flask(__name__, static_folder="../frontend", static_url_path="")
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["*"]}})  # Restrict in production
 
 client = MongoClient(os.getenv("MONGODB_URI"))
 db = client[os.getenv("DB_NAME")]
 report_col = db["country_reports"]
 
-UPLOAD_FOLDER = "./uploads"
+UPLOAD_FOLDER = "./Uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -101,4 +101,4 @@ def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8000)), debug=False)
