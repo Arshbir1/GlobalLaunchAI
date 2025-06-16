@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Report</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <div class="p-6 max-w-4xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold" id="countryTitle">Loading...</h1>
+      <button onclick="goBack()" class="text-sm text-indigo-600 hover:underline">⬅ Back to Rankings</button>
+    </div>
+
+    <div id="reportContainer" class="space-y-4"></div>
+  </div>
+
+  <script>
+    const query = new URLSearchParams(window.location.search);
+    const countryCode = query.get("country");
+    const fullNames = {
+  "AGO": "Angola",
+  "ARE": "United Arab Emirates",
+  "ARG": "Argentina",
+  "ARM": "Armenia",
+  "AUS": "Australia",
+  "AUT": "Austria",
+  "AZE": "Azerbaijan",
+  "BDI": "Burundi",
+  "BEL": "Belgium",
+  "BEN": "Benin",
+  "BFA": "Burkina Faso",
+  "BGD": "Bangladesh",
+  "BGR": "Bulgaria",
+  "BHR": "Bahrain",
+  "BHS": "Bahamas",
+  "BIH": "Bosnia and Herzegovina",
+  "BLR": "Belarus",
+  "BLZ": "Belize",
+  "BOL": "Bolivia",
+  "BRA": "Brazil",
+  "BRN": "Brunei",
+  "BTN": "Bhutan",
+  "BWA": "Botswana",
+  "CAF": "Central African Republic",
+  "CAN": "Canada",
+  "CHE": "Switzerland",
+  "CHL": "Chile",
+  "CHN": "China",
+  "CMR": "Cameroon",
+  "COG": "Republic of the Congo",
+  "COL": "Colombia",
+  "COM": "Comoros",
+  "CRI": "Costa Rica",
+  "CYP": "Cyprus",
+  "CZE": "Czech Republic",
+  "DEU": "Germany",
+  "DJI": "Djibouti",
+  "DNK": "Denmark",
+  "DOM": "Dominican Republic",
+  "DZA": "Algeria",
+  "ECU": "Ecuador",
+  "EGY": "Egypt",
+  "ERI": "Eritrea",
+  "ESP": "Spain",
+  "EST": "Estonia",
+  "ETH": "Ethiopia",
+  "FIN": "Finland",
+  "FJI": "Fiji",
+  "FRA": "France",
+  "FSM": "Micronesia",
+  "GAB": "Gabon",
+  "GBR": "United Kingdom",
+  "GEO": "Georgia",
+  "GHA": "Ghana",
+  "GIN": "Guinea",
+  "GMB": "Gambia",
+  "GNB": "Guinea-Bissau",
+  "GRC": "Greece",
+  "GTM": "Guatemala",
+  "GUY": "Guyana",
+  "HKG": "Hong Kong",
+  "HND": "Honduras",
+  "HRV": "Croatia",
+  "HUN": "Hungary",
+  "IDN": "Indonesia",
+  "IND": "India",
+  "IRL": "Ireland",
+  "IRN": "Iran",
+  "IRQ": "Iraq",
+  "ISL": "Iceland",
+  "ISR": "Israel",
+  "ITA": "Italy",
+  "JAM": "Jamaica",
+  "JOR": "Jordan",
+  "JPN": "Japan",
+  "KAZ": "Kazakhstan",
+  "KEN": "Kenya",
+  "KGZ": "Kyrgyzstan",
+  "KHM": "Cambodia",
+  "KIR": "Kiribati",
+  "KOR": "South Korea",
+  "KWT": "Kuwait",
+  "LBN": "Lebanon",
+  "LBR": "Liberia",
+  "LBY": "Libya",
+  "LCA": "Saint Lucia",
+  "LKA": "Sri Lanka",
+  "LSO": "Lesotho",
+  "LTU": "Lithuania",
+  "LUX": "Luxembourg",
+  "LVA": "Latvia",
+  "MAR": "Morocco",
+  "MCO": "Monaco",
+  "MDA": "Moldova",
+  "MDG": "Madagascar",
+  "MDV": "Maldives",
+  "MEX": "Mexico",
+  "MKD": "North Macedonia",
+  "MLI": "Mali",
+  "MLT": "Malta",
+  "MMR": "Myanmar",
+  "MNE": "Montenegro",  
+  "MNG": "Mongolia",
+  "MOZ": "Mozambique",
+  "MRT": "Mauritania",
+  "MUS": "Mauritius",
+  "MWI": "Malawi",
+  "MYS": "Malaysia",
+  "NAM": "Namibia",
+  "NGA": "Nigeria",
+  "NIC": "Nicaragua",
+  "NLD": "Netherlands",
+  "NOR": "Norway",
+  "NPL": "Nepal",
+  "NZL": "New Zealand",
+  "OMN": "Oman",
+  "PAK": "Pakistan",
+  "PAN": "Panama",
+  "PER": "Peru",
+  "PHL": "Philippines",
+  "PLW": "Palau",
+  "PNG": "Papua New Guinea",
+  "POL": "Poland",
+  "PRT": "Portugal",
+  "PRY": "Paraguay",
+  "QAT": "Qatar",
+  "ROU": "Romania", 
+  "RUS": "Russia",
+  "RWA": "Rwanda",
+  "SAU": "Saudi Arabia",
+  "SUD": "Sudan",
+  "SEN": "Senegal",
+  "SGP": "Singapore",
+  "SLB": "Solomon Islands",
+  "SLE": "Sierra Leone",
+  "SLV": "El Salvador",
+  "SMR": "San Marino",
+  "SOM": "Somalia",
+  "SRB": "Serbia",  
+  "SUR": "Suriname",
+  "SVK": "Slovakia",
+  "SVN": "Slovenia",
+  "SWE": "Sweden",
+  "SWZ": "Eswatini",
+  "SYC": "Seychelles",
+  "SYR": "Syria",
+  "TCD": "Chad",
+  "TGO": "Togo",
+  "THA": "Thailand",
+  "TJK": "Tajikistan",
+  "TKM": "Turkmenistan",
+  "TON": "Tonga",
+  "TTO": "Trinidad and Tobago",
+  "TUN": "Tunisia",
+  "TUR": "Turkey",
+  "TUV": "Tuvalu",
+  "TZA": "Tanzania",
+  "UGA": "Uganda",
+  "UKR": "Ukraine",
+  "URY": "Uruguay",
+  "USA": "United States",
+  "VEN": "Venezuela",
+  "VNM": "Vietnam",
+  "VUT": "Vanuatu",
+  "WSM": "Samoa",
+  "YEM": "Yemen",
+  "ZAF": "South Africa",
+  "ZMB": "Zambia",
+  "ZWE": "Zimbabwe"
+}; // extend as needed
+
+    async function loadReport() {
+      const res = await fetch("/get_reports");
+      const reports = await res.json();
+      const report = reports.find(r => r.country_code === countryCode);
+      if (!report) return;
+
+      document.getElementById("countryTitle").innerText = `${fullNames[countryCode] || countryCode} (${countryCode})`;
+
+      const sections = [
+        ["📈 Market Opportunity", report.market_opportunity],
+        ["⚖️ Regulatory Brief", report.regulatory_brief],
+        ["⚠️ Risk Analysis", report.risk_analysis],
+        ["💸 Trade & Incentives", report.trade_incentives],
+        ["🚀 Expansion Guide", report.expansion_guide],
+        ["🌐 Localized Factors", report.localized_factors],
+      ];
+
+      const container = document.getElementById("reportContainer");
+
+      sections.forEach(([title, data], idx) => {
+        if (!data) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = `
+          <details class="bg-white dark:bg-gray-800 p-4 rounded shadow">
+            <summary class="cursor-pointer font-semibold text-lg">${title}</summary>
+            <div class="mt-2 space-y-2">
+              ${Object.entries(data).map(([k, v]) => `
+                <div>
+                  <strong class="capitalize text-indigo-600">${k.replace(/_/g, ' ')}:</strong>
+                  <p>${Array.isArray(v) ? '<ul class="list-disc pl-6">' + v.map(i => `<li>${i}</li>`).join('') + '</ul>' : v}</p>
+                </div>
+              `).join('')}
+            </div>
+          </details>
+        `;
+        container.appendChild(wrapper);
+      });
+    }
+
+    loadReport();
+    function goBack() {
+      sessionStorage.setItem("backFromReport", "1");
+      window.location.href = "/";
+    }
+
+  </script>
+</body>
+</html>
