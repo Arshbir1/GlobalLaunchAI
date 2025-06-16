@@ -1,14 +1,18 @@
-Flask==2.3.3
-flask-cors==4.0.0
+fastapi==0.115.0
+uvicorn==0.30.6
+pymongo==4.8.0
+google-cloud-aiplatform==1.62.0
+google-cloud-documentai==2.31.0
 python-dotenv==1.0.1
-pymongo==4.7.0
-google-generativeai==0.5.1
-PyMuPDF==1.23.19  # for fitz (used in pdf_reader.py)
-
-# Optional: If running anything with Vertex AI embeddings (e.g., embed_sector_profiles, get_final_shortlist)
-google-cloud-aiplatform==1.48.0
-protobuf==4.25.3
-google-auth==2.29.0
-
-# For local development and testing
-requests==2.31.0
+scikit-learn==1.5.1
+pandas==2.2.2; platform_system != "Linux" or platform_machine != "x86_64"
+pandas==2.2.2; platform_system == "Linux" and platform_machine == "x86_64" --only-binary pandas
+PyPDF2==3.0.1
+gunicorn==22.0.0
+cython==3.0.10
+flask==3.0.3
+flask-cors==5.0.0
+werkzeug==3.0.4
+google-generativeai==0.8.3
+PyMuPDF==1.24.10
+google-auth==2.40.3
