@@ -11,7 +11,7 @@ from google.oauth2 import service_account
 # === Setup ===
 load_dotenv()
 # vertexai.init(project=os.getenv("PROJECT_ID"), location="us-central1")
-credentials = service_account.Credentials.from_service_account_file(os.getenv("SERVICE_ACCOUNT_PATH"))
+credentials = service_account.Credentials.from_service_account_file(os.getenv("GOOGLE_CLOUD_CREDENTIALS")))
 
 
 vertexai.init(
