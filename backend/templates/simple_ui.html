@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlobalLaunch AI - Country Expansion Recommender</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: #f8f9fa;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 2rem;
+    }
+    .country {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+    }
+    .country h3 {
+      margin-top: 0;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 GlobalLaunch AI</h1>
+  <p>Describe your startup or product to discover top countries to expand into:</p>
+
+  <textarea id="userInput" placeholder="e.g. We provide a B2B SaaS platform for cross-border invoice financing..."></textarea>
+  <button onclick="submitInput()">Find Top Countries</button>
+
+  <div class="result" id="results"></div>
+
+  <script>
+    async function submitInput() {
+      const input = document.getElementById("userInput").value;
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "<p>⏳ Processing...</p>";
+
+      const res = await fetch("/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input })
+      });
+
+      const data = await res.json();
+      resultsDiv.innerHTML = "<h2>🌐 Top Recommendations:</h2>";
+
+      data.forEach(entry => {
+        const card = document.createElement("div");
+        card.className = "country";
+        card.innerHTML = `
+          <h3>${entry.country_code}</h3>
+          <p><strong>Score:</strong> ${entry.score}</p>
+          <p><strong>Matched Sectors:</strong> ${entry.sectors_considered?.join(", ") || "N/A"}</p>
+          <details>
+            <summary>View Insight</summary>
+            <pre>${entry.insight}</pre>
+          </details>
+        `;
+        resultsDiv.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

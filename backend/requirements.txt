@@ -1,0 +1,9 @@
+fastapi==0.115.0
+uvicorn==0.30.6
+pymongo==4.8.0
+google-cloud-aiplatform==1.62.0
+google-cloud-documentai==2.31.0
+python-dotenv==1.0.1
+scikit-learn==1.5.1
+pandas==2.2.2
+PyPDF2==3.0.1
