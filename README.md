@@ -1,48 +1,118 @@
-GlobalLaunch AI
-Overview
-GlobalLaunch AI is an AI-powered platform that helps startups identify optimal countries for expansion based on their product, industry, or business plan. It uses MongoDB Atlas Vector Search, Google Cloud Vertex AI/Document AI, and public datasets to provide market insights, regulatory analysis, and risk scores. Each top country includes detailed insight cards: market opportunity, regulatory compliance, risk analysis, trade incentives, expansion guide, and localized considerations. Features include a multilingual chatbot, RAG system for regulation Q&A, and PDF uploads. The frontend is a basic HTML/CSS/JS site for testing, with a focus on backend functionality.
-Setup
+# 🌍 GlobalLaunch AI  
+**Your AI Co-Pilot for International Startup Expansion**
 
-Backend:
-Install dependencies: pip install -r backend/requirements.txt
-Set environment variables in backend/.env
-Run: uvicorn backend.app.main:app --reload
-Preprocess data: python backend/scripts/preprocess_data.py
-Preprocess regulatory texts: python backend/scripts/regulatory_data.py
+GlobalLaunch AI is an intelligent platform designed to help startups identify the best countries for global expansion — instantly. By combining **sector-aware vector search**, **Gemini-powered country reports**, and a **contextual chatbot**, GlobalLaunch delivers actionable, data-backed advice to founders and investors.
 
+Whether you're building a cross-border SaaS or a cleantech company exploring incentives, this platform offers clarity, explainability, and speed — all wrapped in a modern UX.
 
-Frontend:
-Serve frontend folder using npx serve frontend.
-Replace YOUR_GOOGLE_MAPS_API_KEY in index.html.
+---
 
+## ✨ Features
 
-MongoDB:
-Create a cluster, enable Vector Search.
-Create indexes: vector_index on countries.embedding, regulatory_vector_index on regulations.embedding, and pdfs collection.
+- 📄 **Idea Input via Text or PDF**  
+  Upload a startup idea or pitch deck and extract insights instantly.
 
+- 🔍 **Smart Sector Detection**  
+  Uses Gemini to classify ideas into top 3 sectors (e.g., Fintech, AI-ML, Healthtech).
 
-Google Cloud:
-Enable Vertex AI, Document AI, and Maps APIs.
-Set up service account credentials.
+- 🌐 **Top Country Shortlisting**  
+  Combines semantic embeddings + key indicators (FDI, corruption index, digital readiness) to rank best-fit countries.
 
+- 📊 **AI-Generated Country Reports**  
+  Each shortlisted country includes a 6-part report covering market opportunity, regulatory climate, risks, incentives, strategy, and localization.
 
+- 💬 **Interactive Chatbot**  
+  Ask custom questions like “What are Estonia’s licensing laws?” or “Compare Germany and Brazil.” Powered by Gemini + real-time RAG.
 
-Tech Stack
+- ⚡ **Semantic Embeddings**  
+  Each country-sector profile is embedded using Vertex AI for fast, accurate vector search.
 
-Backend: FastAPI, MongoDB Atlas, Google Cloud Vertex/Document AI, PyPDF2
-Frontend: HTML, CSS, JavaScript, TailwindCSS (CDN), i18next, FilePond, Google Maps API
-Data: World Bank GDPR, OECD, WTO, UN, GSMA, Transparency, IMF
-Features:
-Product idea and PDF analysis
-Multilingual chatbot (English, Spanish, French, German)
-RAG system for regulation Q&A
-Interactive map with insight cards
-Detailed country-specific insights (market, regulatory, risk, etc.)
+---
 
+## 🛠 Tech Stack
 
+- **Backend**: Python, Flask, MongoDB Atlas
+- **AI Models**: Google Gemini 1.5 Pro (generation + embeddings), Vertex AI
+- **Frontend**: HTML, TailwindCSS, JavaScript
+- **PDF Parsing**: PyMuPDF
+- **Deployment**: Local Flask / Render-ready / Docker-compatible
 
-Deployment
+---
 
-Deploy via ./deploy.sh (Vercel for backend and static frontend).
-Configure Google Cloud Storage or Vercel Blob for PDF uploads.
+## 📦 Project Structure
 
+```
+GlobalLaunchAI/
+├── backend/
+│   ├── app.py                      # Main Flask API
+│   ├── chatbot.py                  # RAG-style chatbot using Gemini
+│   ├── fallback_sector_detection.py
+│   ├── get_final_shortlist.py      # Semantic scoring + ranking logic
+│   ├── generate_country_reports.py # Full report generation
+│   ├── embed_sector_profiles.py    # Embeds all sector summaries
+│   ├── pdf_reader.py               # PDF to text + sector detection
+│   └── generate_semantics_from_chunks.py
+├── frontend/
+│   ├── index.html                  # Startup idea + report viewer
+│   ├── report.html                 # Detailed report UI
+│   ├── script.js                   # Client-side logic
+│   └── styles.css
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/GlobalLaunchAI.git
+cd GlobalLaunchAI
+```
+
+### 2. Install Python Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Environment Configuration
+
+Create a `.env` file in the root directory with:
+
+```
+MONGODB_URI=your_mongo_uri
+DB_NAME=global_launch
+GOOGLE_API_KEY=your_gemini_key
+GOOGLE_MAIN_API_KEY=your_secondary_key
+PROJECT_ID=your_gcp_project_id
+SERVICE_ACCOUNT_PATH=service-account.json
+SEMANTIC_EMBEDDING=embedding_field
+SEMANTIC_IDX=vector_index_name
+```
+
+### 4. Run the Flask Server
+
+```bash
+python app.py
+```
+
+Access the app at [http://localhost:8000](http://localhost:8000)
+
+---
+
+## 🤝 Contribute & Support
+
+- **GitHub**: [Your Repo](https://github.com/your-username/GlobalLaunchAI)
+- **Issues**: Bug reports and feature requests welcome!
+- **Contact**: Reach out via Discussions or Email
+
+---
+
+## 🏆 Built For
+
+This project was developed for **AI in Action 2025** — showcasing how GenAI and semantic search can drive smarter global business decisions.
+
+---
+
+## 🙏 Thank You
+
+Thanks for exploring GlobalLaunch AI — your global startup advisor, reimagined.
