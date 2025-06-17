@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GlobalLaunch AI</title>
-  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' };
   </script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 relative">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
   <div class="flex h-screen overflow-hidden">
 
     <!-- Left Panel -->
@@ -54,14 +54,12 @@
       </div>
 
       <!-- Search Bar -->
-      <input type="text" placeholder="Search Reports..." id="reportSearch" class="w-full mb-4 p-2 border rounded bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-500 placeholder-gray-400 dark:placeholder-gray-300">
-
       <!-- Reports -->
       <div id="reports" class="space-y-6"></div>
     </div>
 
     <!-- Chatbot Toggle Button -->
-    <button id="chatToggle" class="fixed bottom-6 right-6 z-40 bg-indigo-600 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 transition text-xl">💬</button>
+    <button id="chatToggle" class="fixed bottom-6 left-6 z-40 bg-indigo-600 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 transition text-xl">💬</button>
 
     <!-- Chatbot Panel -->
     <div id="chatPanel" class="hidden w-[400px] fixed right-0 top-0 h-full bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-xl z-30 flex flex-col">
@@ -82,7 +80,6 @@
       <form id="chatForm" class="p-4 border-t border-gray-200 dark:border-gray-700 flex space-x-2 bg-gray-50 dark:bg-gray-900">
         <input type="text" id="userInput" class="flex-1 border border-gray-300 dark:border-gray-600 p-2 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" placeholder="Ask about regulations in Estonia..." />
         <button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition">Send</button>
-        <button id="clearChat" type="button" class="bg-gray-400 text-white px-3 py-2 rounded-lg hover:bg-gray-500 transition">Clear</button>
       </form>
     </div>
   </div>
