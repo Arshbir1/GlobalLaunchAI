@@ -45,6 +45,10 @@ def generate_session_id(text):
     return hashlib.sha256(text.encode()).hexdigest()[:12]
 
 # Serve frontend landing page
+@app.route('/health')
+def health():
+    return jsonify({"status": "healthy"}), 200
+    
 @app.route("/")
 def index():
     return send_from_directory(app.static_folder, "index.html")
