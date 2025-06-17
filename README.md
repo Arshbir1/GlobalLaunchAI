@@ -1,13 +1,27 @@
 # 🌍 GlobalLaunch AI  
 **Your AI Co-Pilot for International Startup Expansion**
 
-GlobalLaunch AI is an intelligent platform designed to help startups identify the best countries for global expansion — instantly. By combining **sector-aware vector search**, **Gemini-powered country reports**, and a **contextual chatbot**, GlobalLaunch delivers actionable, data-backed advice to founders and investors.
+GlobalLaunch AI is an AI-powered platform that helps startups gain new perspectives on global expansion using public economic and regulatory data. By combining MongoDB's advanced vector search with Google's Gemini and Vertex AI, it transforms raw country indicators into strategic insights — letting users explore where and how to grow globally.
 
 Whether you're building a cross-border SaaS or a cleantech company exploring incentives, this platform offers clarity, explainability, and speed — all wrapped in a modern UX.
 
 ---
 
-## ✨ Features
+## 📊 Public Dataset Used
+
+We used country-level economic, regulatory, and digital development indicators — including:
+
+- FDI inflows
+- Corruption Index
+- Ease of Starting a Business
+- Digital Infrastructure Index
+- Trade Incentives & Policy Snapshots
+
+These were cleaned, parsed, and embedded using Google Vertex AI, then stored in MongoDB Atlas with vector search indexing.
+
+---
+
+## ✨ Features & Insights Unlocked
 
 - 📄 **Idea Input via Text or PDF**  
   Upload a startup idea or pitch deck and extract insights instantly.
@@ -31,7 +45,7 @@ Whether you're building a cross-border SaaS or a cleantech company exploring inc
 
 ## 🛠 Tech Stack
 
-- **Backend**: Python, Flask, MongoDB Atlas
+- **Backend**: Python, Flask, MongoDB Atlas (Vector Search)
 - **AI Models**: Google Gemini 1.5 Pro (generation + embeddings), Vertex AI
 - **Frontend**: HTML, TailwindCSS, JavaScript
 - **PDF Parsing**: PyMuPDF
@@ -107,9 +121,9 @@ Access the app at [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 🏆 Built For
+## 🏆 MongoDB Hackathon Submission
 
-This project was developed for **AI in Action 2025** — showcasing how GenAI and semantic search can drive smarter global business decisions.
+This project was developed for the **AI in Action 2025** under the MongoDB challenge — showing how AI and MongoDB vector search can help users explore real-world country data from a strategic business lens.
 
 ---
 
